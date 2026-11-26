@@ -6,9 +6,8 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
-from alembic import context
-from src.quantaspec.app.core.config import get_settings
-from src.quantaspec.app.db.base import Base
+from quantaspec.app.core.config import get_settings
+from quantaspec.app.db.base import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -64,10 +63,10 @@ def run_migrations_offline() -> None:
 def do_run_migrations(connection: Connection) -> None:
     schema = get_settings().DB_SCHEMA
     connection.execute(text(f'SET search_path TO "{schema}", public'))
-    context.configure(connection=connection,
+    connection.commit()
+    context.configure(
+        connection=connection,
         target_metadata=target_metadata,
-        version_table_schema=schema,
-        include_schemas=True,
     )
     with context.begin_transaction():
         context.run_migrations()

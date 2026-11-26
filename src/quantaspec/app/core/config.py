@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     DB_PORT: int = 5432
     DB_USER: str = "postgres"
     DB_PASSWORD: SecretStr = "postgres"
-    DB_NAME: str = "sales_agent"
+    DB_NAME: str = "quantaspec"
     DB_SCHEMA: str = "public"
 
 
